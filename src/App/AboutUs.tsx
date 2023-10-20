@@ -19,7 +19,8 @@ const Content = () => {
 
         <h2>このマップについて</h2>
         <p>作成者:<a href="https://twitter.com/asaburodesu" target='_blank' rel="noreferrer">asaburodesu</a></p>
-        <p>最終更新:2023/10/32</p>
+        <p>最終更新:2023/10/21</p>
+        <p>当サイトでは可能な限り情報の正確性を心がけていますが、安全性や確実な情報提供を保証するものではありません。掲載内容で生じた損害（間接的を含む）に対する一切の責任を負いません。</p>
 
         {config.form_url?
           <>
