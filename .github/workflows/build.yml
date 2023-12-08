@@ -11,8 +11,8 @@ on:
   workflow_dispatch:
 
   schedule:
-    - cron:  '*/10 * * * *'
-    # 10分ごとに実行
+    - cron:  '15 7 * * *'
+    # 毎日7時15分に実行
 
 permissions:
   contents: write
@@ -22,31 +22,36 @@ permissions:
 jobs:
   ubuntu:
     runs-on: ubuntu-latest
-    env:
-      GOOGLE_SHEET_API_KEY: ${{ secrets.GOOGLE_SHEET_API_KEY }}
-      GOOGLE_SHEET_URL: ${{ secrets.GOOGLE_SHEET_URL }}
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v1
       with:
         node-version: 16.x
 
-    - run: npm install
+    - name: Install dependencies
+      run: pip install -r requirements.txt
 
-    - name: Download data and set up environment variables
-      run: |
-        node bin/download.js ${GOOGLE_SHEET_URL} ${GOOGLE_SHEET_API_KEY}
+    - name: Run Python
+      run: python uni_get.py
 
-    - name: Push the data to Github
+    - name: Move data.json to public directory
+      run: mv data.json public/
+      
+    - name: Commit changes
       run: |
+
         git config --global user.name "${GITHUB_ACTOR}"
         git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-        if (git diff --shortstat | grep '[0-9]'); then \
-          git add .; \
-          git status .; \
-          git commit -m "スプレッドシートのデータを更新"; \
-          git push -f origin master; \
+        # 変更があるか確認
+        if git diff --quiet; then
+          echo "No changes to commit."
+        else
+          git add public/data.json
+          git commit -m "データを更新"
+          git push origin master
         fi
+
+    - run: npm install
 
     - run: npm run build -repository=${GITHUB_REPOSITORY}
 
