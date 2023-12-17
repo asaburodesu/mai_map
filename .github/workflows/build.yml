@@ -50,7 +50,6 @@ jobs:
         
     - name: Commit changes
       run: |
-
         git config --global user.name "${GITHUB_ACTOR}"
         git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
         # 変更があるか確認
@@ -58,7 +57,7 @@ jobs:
           echo "No changes to commit."
         else
           git add public/data.json
-          git commit -m "データを更新 ($LAST_UPDATE")"
+          git commit -m "データを更新 ($LAST_UPDATE)"
           git push origin master
         fi
 
