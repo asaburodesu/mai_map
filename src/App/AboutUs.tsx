@@ -21,7 +21,7 @@ const Content = () => {
     <div className="about-us">
       <div className="container">
         <div className="branding">
-          <div className="logo">CHUNITHM設置店舗マップ</div>
+          <div className="logo">maimai設置店舗マップ</div>
         </div>
 
         <h2>このマップについて</h2>
