@@ -13,7 +13,7 @@ values = []
 value = ["タイムスタンプ","カテゴリ","画像","緯度","経度","スポット名","紹介文","Instagram","Twitter","公式サイト","Facebook"]
 values.append(value)
 
-url = 'https://location.am-all.net/alm/location?gm=109&ct=1000&at='
+url = 'https://location.am-all.net/alm/location?gm=96&ct=1000&at='
 
 for i in range(47):
     print(i)
@@ -29,7 +29,7 @@ for i in range(47):
         address2 = address.replace(todofuken,'')
         location = str(tempo.find(class_="store_map")).replace('\n', '')
         detail = re.search('sid=\d+',str(tempo.find(class_="store_bt")).replace('\n', ''))[0]
-        detailurl = "https://location.am-all.net/alm/shop?gm=109&astep=0&" + detail
+        detailurl = "https://location.am-all.net/alm/shop?gm=96&astep=0&" + detail
         
         pattern = '@.*&'
         result = re.findall(pattern, location)[0].replace('@','').replace('&','')
