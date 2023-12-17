@@ -29,6 +29,11 @@ const Content = () => {
         <p>最終更新: {lastUpdate}</p>
         <p>当サイトでは可能な限り情報の正確性を心がけていますが、安全性や確実な情報提供を保証するものではありません。掲載内容で生じた損害（間接的を含む）に対する一切の責任を負いません。</p>
 
+        <h2>他機種マップ</h2>
+        <p><a href="https://asaburodesu.github.io/chu_map/" target='_blank' rel="noreferrer">CHUNITHM設置店舗マップ</a></p>
+        <p><a href="https://asaburodesu.github.io/geki_map/" target='_blank' rel="noreferrer">オンゲキ設置店舗マップ</a></p>
+        
+
         {config.form_url?
           <>
             <h2>データの更新について</h2>
