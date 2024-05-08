@@ -31,13 +31,14 @@ for i in range(47):
         location = str(tempo.find(class_="store_map")).replace('\n', '')
         detail = re.search('sid=\d+',str(tempo.find(class_="store_bt")).replace('\n', ''))[0]
         detailurl = "https://location.am-all.net/alm/shop?gm=96&astep=0&" + detail
-        
+        twitter = "https://twitter.com/intent/tweet?text=" + address + "%2C" + name
+      
         pattern = '@.*&'
         result = re.findall(pattern, location)[0].replace('@','').replace('&','')
         ido = result.split(',')[0]
         keido = result.split(',')[1]
 
-        value = ["",todofuken,"",ido,keido,name,address2,"","",detailurl,""]
+        value = ["",todofuken,"",ido,keido,name,address2,"",twitter,detailurl,""]
         values.append(value)
 
         
