@@ -1,17 +1,16 @@
 import './AboutUs.scss';
 import config from '../config.json';
-import lastUpdateData from '../last_update.json'; // パスは実際のファイルの場所に合わせてください
 import { FaPlus } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
 
-const Content = () => {
+const AboutUs = () => {
   const [lastUpdate, setLastUpdate] = useState('');
 
   useEffect(() => {
     const fetchLastUpdate = async () => {
       try {
-        const response = await fetch('../last_update.json', {
-          cache: 'no-cache' // キャッシュを無効にする
+        const response = await fetch('/path/to/last_update.json', {
+          cache: 'no-cache', // キャッシュを無効にする
         });
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -26,6 +25,12 @@ const Content = () => {
 
     fetchLastUpdate();
   }, []); // 最初にコンポーネントがマウントされたときに一度だけ実行
+
+  const clickHandler = () => {
+    if (config.form_url) {
+      window.location.href = config.form_url;
+    }
+  };
 
   return (
     <div className="about-us">
@@ -43,19 +48,18 @@ const Content = () => {
         <p><a href="https://asaburodesu.github.io/chu_map/" target='_blank' rel="noreferrer">CHUNITHM設置店舗マップ</a></p>
         <p><a href="https://asaburodesu.github.io/geki_map/" target='_blank' rel="noreferrer">オンゲキ設置店舗マップ</a></p>
         
-
-        {config.form_url?
+        {config.form_url ? (
           <>
             <h2>データの更新について</h2>
             <p>このアプリのデータを更新するには下の「 + 」ボタンを押してフォームに必要な情報を入力してください。</p>
-            <div className="goto-form"><button><FaPlus color="#FFFFFF" onClick={clickHandler} /></button></div>
+            <div className="goto-form">
+              <button onClick={clickHandler}><FaPlus color="#FFFFFF" /></button>
+            </div>
           </>
-          :
-          <></>
-        }
+        ) : null}
       </div>
     </div>
   );
 };
 
-export default Content;
+export default AboutUs;
