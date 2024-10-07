@@ -8,14 +8,24 @@ const Content = () => {
   const [lastUpdate, setLastUpdate] = useState('');
 
   useEffect(() => {
-    setLastUpdate(lastUpdateData.last_update);
-  }, []); // 最初にコンポーネントがマウントされたときに一度だけ実行
+    const fetchLastUpdate = async () => {
+      try {
+        const response = await fetch('../last_update.json', {
+          cache: 'no-cache' // キャッシュを無効にする
+        });
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setLastUpdate(data.last_update);
+      } catch (error) {
+        console.error('Fetching last update failed:', error);
+        setLastUpdate('情報の取得に失敗しました'); // エラーメッセージを設定
+      }
+    };
 
-  const clickHandler = () => {
-    if (config.form_url) {
-      window.location.href = config.form_url;
-    }
-  };
+    fetchLastUpdate();
+  }, []); // 最初にコンポーネントがマウントされたときに一度だけ実行
 
   return (
     <div className="about-us">
