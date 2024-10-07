@@ -46,8 +46,9 @@ jobs:
         echo "Last Update: $LAST_UPDATE"
 
     - name: Move data.json to public directory
-      run: mv data.json public/
-           mv last_update.json public/
+      run: |
+        mv data.json public/
+        mv last_update.json public/
         
     - name: Commit changes
       run: |
