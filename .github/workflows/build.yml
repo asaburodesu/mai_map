@@ -47,7 +47,7 @@ jobs:
 
     - name: Move data.json to public directory
       run: mv data.json public/
-           mv last_update.json public./
+           mv last_update.json public/
         
     - name: Commit changes
       run: |
