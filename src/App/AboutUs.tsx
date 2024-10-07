@@ -9,7 +9,7 @@ const AboutUs = () => {
   useEffect(() => {
     const fetchLastUpdate = async () => {
       try {
-        const response = await fetch('./last_update.json', {
+        const response = await fetch('https://asaburodesu.github.io/mai_map/last_update.json', {
           cache: 'no-cache', // キャッシュを無効にする
         });
         if (!response.ok) {
