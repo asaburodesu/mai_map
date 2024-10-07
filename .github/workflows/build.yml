@@ -33,9 +33,6 @@ jobs:
 
     - name: Run Python
       run: python mai_get.py
-
-    - name: Move data.json to public directory
-      run: mv data.json public/
       
     - name: Set Last Update
       id: set_last_update
@@ -47,6 +44,10 @@ jobs:
     - name: Use Last Update
       run: |
         echo "Last Update: $LAST_UPDATE"
+
+    - name: Move data.json to public directory
+      run: mv data.json public/
+           mv last_update.json public./
         
     - name: Commit changes
       run: |
