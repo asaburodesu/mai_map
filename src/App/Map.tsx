@@ -76,7 +76,7 @@ const Content = (props: Props) => {
       mapObject.addSource('shops', {
         type: 'geojson',
         data: geojson,
-        cluster: true,
+        cluster: false,
         clusterMaxZoom: 14,
         clusterRadius: 25,
       })
@@ -89,7 +89,7 @@ const Content = (props: Props) => {
           ['==', '$type', 'Point'],
         ],
         paint: {
-          'circle-radius': 13,
+          'circle-radius': 7,
           'circle-color': '#FF0000',
           'circle-opacity': 0.4,
           'circle-stroke-width': 2,
