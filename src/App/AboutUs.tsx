@@ -47,6 +47,7 @@ const AboutUs = () => {
         <h2>他機種マップ</h2>
         <p><a href="https://asaburodesu.github.io/chu_map/" target='_blank' rel="noreferrer">CHUNITHM設置店舗マップ</a></p>
         <p><a href="https://asaburodesu.github.io/geki_map/" target='_blank' rel="noreferrer">オンゲキ設置店舗マップ</a></p>
+        <p><a href="https://asaburodesu.github.io/imas_map/" target='_blank' rel="noreferrer">ツアマス設置店舗マップ</a></p>
         
         {config.form_url ? (
           <>
