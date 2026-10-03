@@ -7,6 +7,8 @@ import Shop from './Shop'
 
 type Props = {
   data: Pwamap.ShopData[];
+  // true のときはデータが変わっても表示位置を動かさない（最初の表示は地図の作成時に合わせる）
+  keepView?: boolean;
 };
 
 const CSS: React.CSSProperties = {
@@ -159,12 +161,45 @@ const Content = (props: Props) => {
   }
 
   React.useEffect(() => {
+    if (!mapObject) {
+      return
+    }
+
+    // マーカー追加済みの場合は表示するデータだけ差し替える（都道府県の絞り込みなど）
+    const source = mapObject.getSource('shops')
+    if (source) {
+      source.setData(toGeoJson(props.data))
+      return
+    }
 
     addMarkers(mapObject, props.data)
 
   }, [mapObject, props.data])
 
   React.useEffect(() => {
+    if (!mapObject || props.keepView || props.data.length === 0) {
+      return
+    }
+    const geojson = toGeoJson(props.data)
+    const bounds = geojsonExtent(geojson)
+
+    if (bounds) {
+      mapObject.fitBounds(bounds, {
+        padding: 50,
+        // 店舗が 1 件だけの場合に拡大しすぎないようにする
+        maxZoom: 15,
+        animate: false,
+      })
+    }
+  }, [mapObject, props.data, props.keepView])
+
+  React.useEffect(() => {
+    // 地図はほかのページを表示している間も隠して残しているので、そのときは URL を書き換えない
+    const path = window.location.hash.substring(1).split('?')[0]
+    if (path !== '' && path !== '/') {
+      return
+    }
+
     const hash = parseHash();
     if (zLatLngString) {
       hash.set('map', zLatLngString);
